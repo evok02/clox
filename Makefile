@@ -1,5 +1,5 @@
 CFLAGS = -Wall -Wextra
-DEPENDENCIES = chunk.c memory.c debug.c value.c line.c
+DEPENDENCIES = chunk.c memory.c debug.c value.c line.c vm.c
 DEFAULT_GOAL = run
 
 # TODO:

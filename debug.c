@@ -27,7 +27,7 @@ static int constantInstruction(const char* name, Chunk* chunk,
 }
 
 // disassebleInstruction returns the offset of the next 
-// instruction in the chunk and prints the instuction
+// instruction in the chunk and prints the instruction
 // in stdout.
 int disassembleInstruction(Chunk* chunk, int offset) {
     printf("%04d ", offset); 

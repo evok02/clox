@@ -37,9 +37,7 @@ uint16_t getLine(LineArray* array, uint16_t idx) {
     int32_t sum = 0;
     for (uint16_t i = 0; i < array->count; i++) {
         sum += array->repeat[i];
-        // as idx start with 0 and minimal repeat[i]
-        // equalt to 1, sum >= idx + 1 handle this
-        if (sum >= idx + 1) return array->number[i];
+        if (sum - 1 >= idx) return array->number[i];
     }
     return 0;
 }
