@@ -18,7 +18,7 @@ void writeLineArray(LineArray* array, uint16_t line) {
                    oldCapacity, array->capacity);
     }
     
-    if (array->number[array->count - 1] == line) {
+    if (array->number[array->count] == line) {
         array->repeat[array->count]++;
     } else {
         array->number[array->count] = line; 

@@ -4,24 +4,26 @@
 #include "chunk.h"
 #include "value.h"
 
-#define STACK_MAX 256
+#define STACK_MAX 4096
+#define STACK_MIN 256 
 
 typedef struct {
     Chunk* chunk; // chunk of bytecode
     uint8_t* ip; //instruction pointer
-    Value stack[STACK_MAX];
+    Value* stack;
+    size_t stackCapacity;
     Value* stackTop;
 } VM;
 
 typedef enum {
     INTERPRET_OK, 
-    INTERPRET_COMPILER_ERROR,
+    INTERPRET_COMPILE_ERROR,
     INTERPRET_RUNTIME_ERROR
 } InterpretResult;
 
 void initVM();
 void freeVM();
-InterpretResult interpret(Chunk* chunk);
+InterpretResult interpret(char* source);
 void push(Value value);
 Value pop();
 
