@@ -109,7 +109,7 @@ void initScanner(const char* source) {
 }
 
 static bool isDigit(char c) {
-    return c > '0' && c < '9';
+    return c >= '0' && c <= '9';
 }
 
 static Token number() {
