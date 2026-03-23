@@ -13,7 +13,10 @@ typedef struct {
     Value* stack;
     size_t stackCapacity;
     Value* stackTop;
+    Obj* objects; // pointer to the heap 
 } VM;
+
+extern VM vm;
 
 typedef enum {
     INTERPRET_OK, 

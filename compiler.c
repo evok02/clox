@@ -181,6 +181,11 @@ static void number() {
     emitConstant(NUMBER_VAL(value));
 }
 
+static void string() {
+    emitConstant(OBJ_VAL(copyString(parser.previous.start + 1,
+                                    parser.previous.length - 2)));
+}
+
 static void literal() {
     switch (parser.previous.type) {
         case TOKEN_FALSE:   emitByte(OP_FALSE); break;
@@ -211,7 +216,7 @@ ParseRule rules[] = {
     [TOKEN_LESS] = {NULL, binary, PREC_COMPARISON},
     [TOKEN_LESS_EQUAL] = {NULL, binary, PREC_COMPARISON},
     [TOKEN_IDENTIFIER] = {NULL, NULL, PREC_NONE},
-    [TOKEN_STRING] = {NULL, NULL, PREC_NONE},
+    [TOKEN_STRING] = {string, NULL, PREC_NONE},
     [TOKEN_NUMBER] = {number, NULL, PREC_NONE},
     [TOKEN_AND] = {NULL, NULL, PREC_NONE},
     [TOKEN_CLASS] = {NULL, NULL, PREC_NONE},
@@ -250,7 +255,7 @@ static void binary() {
         case TOKEN_BANG_EQUAL:      emitBytes(OP_EQUAL, OP_NOT); break;
         case TOKEN_EQUAL_EQUAL:     emitByte(OP_EQUAL); break;
         case TOKEN_GREATER:         emitByte(OP_GREATER); break;
-        case TOKEN_GREATER_EQUAL:   emitBytes(OP_LESS, OP_GREATER); break;
+        case TOKEN_GREATER_EQUAL:   emitBytes(OP_LESS, OP_NOT); break;
         case TOKEN_LESS:            emitByte(OP_LESS); break;
         case TOKEN_LESS_EQUAL:      emitBytes(OP_GREATER, OP_NOT); break;
 
