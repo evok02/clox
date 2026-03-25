@@ -1,7 +1,7 @@
 CFLAGS = -Wall -Wextra
 DEPENDENCIES = chunk.c memory.c debug.c value.c \
 			   line.c vm.c scanner.c compiler.c \
-			   object.c
+			   object.c table.c
 DEFAULT_GOAL = run
 
 # TODO:

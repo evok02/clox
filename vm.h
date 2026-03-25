@@ -3,6 +3,7 @@
 
 #include "chunk.h"
 #include "value.h"
+#include "table.h"
 
 #define STACK_MAX 4096
 #define STACK_MIN 256 
@@ -13,6 +14,8 @@ typedef struct {
     Value* stack;
     size_t stackCapacity;
     Value* stackTop;
+    Table globals;
+    Table strings;
     Obj* objects; // pointer to the heap 
 } VM;
 
