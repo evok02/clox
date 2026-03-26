@@ -39,7 +39,7 @@ static ObjString* allocateString(const char* chars, int length,
 // FNV-1a hashing function implementation.
 //
 static uint32_t hashString(const char* key, int length) {
-    uint32_t hash = 2166186261u; // magic number
+    uint32_t hash = 2166136261u; // magic number
     for (int i = 0; i < length; i++) { 
         hash ^= (uint8_t)key[i]; // xor magic
         hash *= 16777619; // cherry on top
@@ -57,7 +57,6 @@ ObjString* copyString(const char* chars, int length) {
     ObjString* interned = tableFindString(&vm.strings, chars, length,
                                           hash);
     if (interned != NULL) {
-        FREE_ARRAY(char, chars, length + 1);
         return interned;
     }
     return allocateString(chars, length, hash);

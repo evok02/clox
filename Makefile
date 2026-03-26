@@ -3,6 +3,7 @@ DEPENDENCIES = chunk.c memory.c debug.c value.c \
 			   line.c vm.c scanner.c compiler.c \
 			   object.c table.c
 DEFAULT_GOAL = run
+LOX_FILE = ./main.txt
 
 # TODO:
 # read how to make dynamic linking and
@@ -16,6 +17,9 @@ build-debug:
 
 run: build
 	@ ./bin/clox
+
+run-file: build
+	@ ./bin/clox $(LOX_FILE)
 
 debug: build-debug
 	@ gdb ./bin/debug

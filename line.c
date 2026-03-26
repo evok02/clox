@@ -18,8 +18,8 @@ void writeLineArray(LineArray* array, uint16_t line) {
                    oldCapacity, array->capacity);
     }
     
-    if (array->number[array->count] == line) {
-        array->repeat[array->count]++;
+    if (array->count > 0 && array->number[array->count - 1] == line) {
+        array->repeat[array->count - 1]++;
     } else {
         array->number[array->count] = line; 
         array->repeat[array->count] = 1;
@@ -28,8 +28,8 @@ void writeLineArray(LineArray* array, uint16_t line) {
 }
 
 void freeLineArray(LineArray* array) {
-    FREE_ARRAY(int, array->number, array->count);
-    FREE_ARRAY(int, array->repeat, array->count);
+    FREE_ARRAY(uint16_t, array->number, array->count);
+    FREE_ARRAY(uint8_t, array->repeat, array->count);
     initLineArray(array);
 }
 
