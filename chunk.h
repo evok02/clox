@@ -22,7 +22,12 @@ typedef enum {
     OP_DIVIDE,
     OP_NOT,
     OP_PRINT,
+    OP_JUMP_IF_FALSE,
+    OP_JUMP,
+    OP_LOOP,
     OP_POP,
+    OP_GET_LOCAL,
+    OP_SET_LOCAL,
     OP_GET_GLOBAL,
     OP_SET_GLOBAL,
 } OpCode;
