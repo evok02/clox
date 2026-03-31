@@ -334,6 +334,7 @@ static void grouping(bool canAssign) {
 
 static uint8_t makeConstant(Value value) {
     int constant = addConstant(currentChunk(), value);
+
     if (constant > UINT8_MAX) {
         error("Too many constants in one chunk.");
         return 0;
@@ -555,10 +556,8 @@ static void whileStatement() {
     emitByte(OP_POP);
     statement();
 
-    patchJump(exitJump);
-    emitByte(OP_POP);
-
     emitLoop(loopStart);
+    patchJump(exitJump);
     emitByte(OP_POP);
 }
 

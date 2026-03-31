@@ -3,7 +3,7 @@ DEPENDENCIES = chunk.c memory.c debug.c value.c \
 			   line.c vm.c scanner.c compiler.c \
 			   object.c table.c
 DEFAULT_GOAL = run
-LOX_FILE = ./main.txt
+LOX_FILE = ./main.lox
 
 # TODO:
 # read how to make dynamic linking and

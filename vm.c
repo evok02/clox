@@ -49,12 +49,13 @@ void freeVM() {
 void push(Value value) {
     if (vm.stackTop - vm.stack + 1 > vm.stackCapacity) {
         size_t oldCapacity = vm.stackCapacity;
+        size_t count = vm.stackTop - vm.stack;
         vm.stackCapacity = GROW_CAPACITY(vm.stackCapacity);
         if (vm.stackCapacity > STACK_MAX) 
             exit(INTERPRET_RUNTIME_ERROR);
         vm.stack = GROW_ARRAY(Value, vm.stack, 
                    oldCapacity, vm.stackCapacity);
-        vm.stackTop = vm.stack + oldCapacity;
+        vm.stackTop = vm.stack + count;
     }
     *vm.stackTop = value;
     vm.stackTop++;
@@ -141,6 +142,7 @@ static InterpretResult run() {
             }
             case OP_SET_LOCAL: {
                 uint8_t slot = READ_BYTE();
+                vm.stack[slot] = peek(0);
                 break;
             }
             case OP_GET_GLOBAL: {
@@ -155,7 +157,7 @@ static InterpretResult run() {
             }
             case OP_SET_GLOBAL: {
                 ObjString* name = READ_STRING();
-                if (!tableSet(&vm.globals, name, peek(0))) {
+                if (tableSet(&vm.globals, name, peek(0))) {
                     tableDelete(&vm.globals, name);
                     runtimeError("Undefinded variable '%s'.", name->chars);
                     return INTERPRET_RUNTIME_ERROR;
